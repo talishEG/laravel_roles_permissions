@@ -49,10 +49,7 @@ if (isset($category)) {
                         <div class="body-title">Upload images <span class="tf-color-1">*</span>
                         </div>
                         <div class="upload-image flex-grow">
-                            <div class="item" id="imgpreview" style="display:none">
-                                <img src="../../../localhost_8000/images/upload/upload-1.png"
-                                     class="effect8" alt="">
-                            </div>
+
                             <div id="upload-file" class="item up-load">
                                 <label class="uploadfile" for="myFile">
                                                         <span class="icon">
@@ -62,6 +59,10 @@ if (isset($category)) {
                                                 class="tf-color">click to browse</span></span>
                                     <input type="file" id="myFile" name="image" accept="image/*">
                                 </label>
+                            </div>
+                            <div class="item" id="imgpreview" style="display: none">
+                                <img src="{{ asset('placeholder-image.png') }}"
+                                     class="effect8" alt="">
                             </div>
                         </div>
                     </fieldset>
@@ -87,6 +88,17 @@ if (isset($category)) {
                     .replace(/[^\w-]+/g, ''); // Remove special characters
 
                 $('#slug').val(slug);
+            });
+
+            $('#myFile').on('change', function (event) {
+                if (event.target.files && event.target.files[0]) {
+                    let reader = new FileReader();
+                    reader.onload = function (e) {
+                        $("#imgpreview").show();
+                        $('#imgpreview img').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(event.target.files[0]);
+                }
             });
         });
     </script>
