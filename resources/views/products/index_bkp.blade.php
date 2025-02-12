@@ -88,7 +88,7 @@
                 </table>
                 {{ $products->links() }}
             @else
-                <div class="bg-blue-200 border-blue-600 p-4 mb-3 rounded-sm shadow-sm">
+                <div class="text-center text-3xl">
                     No products found.
                 </div>
             @endif

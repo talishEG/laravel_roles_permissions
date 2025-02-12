@@ -40,8 +40,34 @@ if (isset($category)) {
                         <div class="body-title">Category Name <span class="tf-color-1">*</span>
                         </div>
                         <input class="flex-grow" type="text" placeholder="Category name" name="name"
-                               tabindex="0" value="{{ old('name', $categoryName) }}" aria-required="true" required="">
+                               tabindex="0" value="{{ old('name', $categoryName) }}">
                     </fieldset>
+                    @error('name')
+                    <p class="text-red-600">{{ $message }}</p>
+                    @enderror
+                    <fieldset>
+                        <div class="body-title">Upload images <span class="tf-color-1">*</span>
+                        </div>
+                        <div class="upload-image flex-grow">
+                            <div class="item" id="imgpreview" style="display:none">
+                                <img src="../../../localhost_8000/images/upload/upload-1.png"
+                                     class="effect8" alt="">
+                            </div>
+                            <div id="upload-file" class="item up-load">
+                                <label class="uploadfile" for="myFile">
+                                                        <span class="icon">
+                                                            <i class="icon-upload-cloud"></i>
+                                                        </span>
+                                    <span class="body-text">Drop your images here or select <span
+                                                class="tf-color">click to browse</span></span>
+                                    <input type="file" id="myFile" name="image" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+                    @error('image')
+                    <p class="text-red-600">{{ $message }}</p>
+                    @enderror
                     <div class="bot">
                         <div></div>
                         <button class="tf-button w208" type="submit">{{ $categoryName ? __('Update') : __('Save') }}</button>

@@ -41,6 +41,7 @@
                         <th class="text-center">#</th>
                         <th class="text-center">Name</th>
                         <th class="text-center">Slug</th>
+                        <th class="text-center">Image</th>
                         <th class="text-center">Created</th>
                         @canany(['edit categories', 'delete categories'])
                         <th class="text-center">Action</th>
@@ -54,6 +55,15 @@
                         <td class="text-center">{{ $category->id }}</td>
                         <td class="text-center">{{ $category->name }}</td>
                         <td class="text-center">{{ $category->slug }}</td>
+                        <td class="text-center">
+                            <div class="flex justify-center mb-4">
+                                @if ($category->imageFullPath)
+                                <img src="{{ $category->imageFullPath }}" alt="Product Image" class="w-20 h-20 object-cover rounded-full">
+                                @else
+                                <img src="{{ asset('placeholder-image.png') }}" alt="Default Image" class="w-20 h-20 object-cover rounded-full">
+                                @endif
+                            </div>
+                        </td>
                         <td class="text-center">{{ $category->created_at }}</td>
                         <td class="flex mx-auto justify-center">
                             <div class="list-icon-function">
@@ -67,6 +77,7 @@
                                 @can('delete categories')
                                 <form action="{{ route('categories.delete', $category->id) }}" method="POST">
                                     @csrf
+                                    @method('DELETE')
                                     <button type="submit" class="item text-danger delete pl-0">
                                         <i class="icon-trash-2"></i>
                                     </button>
@@ -80,7 +91,7 @@
                 </table>
                 {{ $categories->links() }}
                 @else
-                <div class="bg-blue-200 border-blue-600 p-4 mb-3 rounded-sm shadow-sm">
+                <div class="text-center text-3xl">
                     No categories found.
                 </div>
                 @endif

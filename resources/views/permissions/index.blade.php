@@ -65,6 +65,7 @@
                                 @can('delete permissions')
                                 <form action="{{ route('permissions.delete', $permission->id) }}" method="POST">
                                     @csrf
+                                    @method('DELETE')
                                     <button type="submit" class="item text-danger delete pl-0">
                                         <i class="icon-trash-2"></i>
                                     </button>
@@ -78,7 +79,7 @@
                 </table>
                 {{ $permissions->links() }}
                 @else
-                <div class="bg-blue-200 border-blue-600 p-4 mb-3 rounded-sm shadow-sm">
+                <div class="text-center text-3xl">
                     No permissions found.
                 </div>
                 @endif

@@ -44,11 +44,14 @@ class CategoryController extends Controller implements HasMiddleware
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:categories|min:3',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
         if($validator->passes()) {
+            $imagePath = $request->file('image')->store('category_images', 'public');
             Category::create([
                 'name' => $request->name,
-                'slug' => Str::slug($request->name)
+                'slug' => Str::slug($request->name),
+                'image' => $imagePath,
             ]);
             return redirect()->route('categories.index')->with('success', 'Article created successfully');
         } else {

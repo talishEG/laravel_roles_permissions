@@ -69,6 +69,7 @@
                                 @can('delete users')
                                 <form action="{{ route('users.delete', $user->id) }}" method="POST">
                                     @csrf
+                                    @method('DELETE')
                                     <button type="submit" class="item text-danger delete pl-0">
                                         <i class="icon-trash-2"></i>
                                     </button>
@@ -82,7 +83,7 @@
                 </table>
                 {{ $users->links() }}
                 @else
-                <div class="bg-blue-200 border-blue-600 p-4 mb-3 rounded-sm shadow-sm">
+                <div class="text-center text-3xl">
                     No users found.
                 </div>
                 @endif
